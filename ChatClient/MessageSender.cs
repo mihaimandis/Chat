@@ -102,12 +102,6 @@ namespace ChatClient
             //request.Method = "POST";
 
 
-            using (var streamWriter = new StreamWriter(request.GetRequestStream()))
-            {
-                var xmlSerialiser = new XmlSerializer(typeof(string));
-                streamWriter.Write(requestBody);
-            }
-
             Task<WebResponse> response = request.GetResponseAsync();
             byte[] responseBodyBytes = new Byte[(int)response?.Result?.ContentLength];
             int cbytes = response.Result.GetResponseStream().Read(responseBodyBytes, 0, (int)response?.Result?.ContentLength);
